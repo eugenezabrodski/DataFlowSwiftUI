@@ -8,19 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @EnvironmentObject var model: DataModel
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        NavigationView {
+            VStack(spacing: 25) {
+                Text("Text: \(model.title)")
+                Text("Count: \(model.count)")
+                ButtonView(count: $model.count)
+                NavigationLink(destination: EnviromentObjectView()) {
+                    Text("Go to EnviromentObjectView")
+                }
+            }
+            .padding()
         }
-        .padding()
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(DataModel())
     }
 }
